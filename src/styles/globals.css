@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* styles/globals.css */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Optional: to remove scroll */
+}
+
+/* In your globals.css */
+@media (max-width: 640px) {
+  .top-panel-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .browser-window {
+    width: 100% !important;
+    height: 80vh !important;
+    left: 0 !important;
+    top: 10vh !important;
+  }
+  
+  .tab-bar {
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  
+  .address-bar {
+    flex-direction: column;
+  }
+}
+
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Better touch feedback */
+button:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
+}
+
+/* Prevent text selection during drag */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
