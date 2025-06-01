@@ -2,8 +2,10 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { FiX, FiMinus, FiMaximize2, FiRefreshCw, FiChevronLeft, FiChevronRight, FiPlus, FiHome } from "react-icons/fi";
+import { useBrowserStore } from '../store/browserWindowStore'
 
 export default function BrowserWindow() {
+  const toggleBrowser = useBrowserStore((state) => state.toggleBrowser);
   const [tabs, setTabs] = useState([
     { 
       id: 1, 
@@ -19,16 +21,17 @@ export default function BrowserWindow() {
   ]);
   const [address, setAddress] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [position, setPosition] = useState({ x: 20, y: 20 });
   const [isDragging, setIsDragging] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const addressInputRef = useRef<HTMLInputElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
 
   const [windowDimensions, setWindowDimensions] = useState({
-    width: Math.min(800, window.innerWidth - 40),
-    height: Math.min(600, window.innerHeight - 100)
+    width: Math.min(320, window.innerWidth - 40),
+    height: Math.min(500, window.innerHeight - 80)
   });
+
   // Handle window dragging
   const handleDragStart = () => {
     setIsDragging(true);
@@ -236,9 +239,6 @@ export default function BrowserWindow() {
         };
         return newTabs;
       });
-      
-      // In a real implementation, you would reload the iframe
-      // iframeRef.current?.contentWindow?.location.reload();
     }
   };
 
@@ -322,53 +322,53 @@ export default function BrowserWindow() {
     >
       {/* Window Header - Drag handle */}
       <motion.div
-        className="bg-gray-700 h-10 flex items-center justify-between px-3 cursor-move touch-none"
+        className="bg-gray-700 h-8 flex items-center justify-between px-2 cursor-move touch-none"
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1">
           <button 
-            className="w-4 h-4 rounded-full bg-red-500 flex items-center justify-center hover:bg-red-400 transition active:scale-90"
+            className="w-3 h-3 rounded-full bg-red-500 flex items-center justify-center hover:bg-red-400 transition active:scale-90"
             onClick={() => setShowPopup(true)}
           >
-            <FiX className="text-xs opacity-0 hover:opacity-100" />
+            <FiX className="text-[8px] opacity-0 hover:opacity-100" />
           </button>
-          <button className="w-4 h-4 rounded-full bg-yellow-500 hover:bg-yellow-400 transition active:scale-90">
-            <FiMinus className="text-xs opacity-0 hover:opacity-100" />
+          <button className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition active:scale-90">
+            <FiMinus className="text-[8px] opacity-0 hover:opacity-100" />
           </button>
-          <button className="w-4 h-4 rounded-full bg-green-500 hover:bg-green-400 transition active:scale-90">
-            <FiMaximize2 className="text-xs opacity-0 hover:opacity-100" />
+          <button className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition active:scale-90">
+            <FiMaximize2 className="text-[8px] opacity-0 hover:opacity-100" />
           </button>
         </div>
-        <div className="text-sm text-gray-300 truncate px-2">Ubuntu Browser</div>
-        <div className="w-8"></div>
+        <div className="text-xs text-gray-300 truncate px-1">Ubuntu Browser</div>
+        <div className="w-6"></div>
       </motion.div>
 
       {/* Tab Bar - Mobile optimized */}
-      <div className="bg-gray-700 h-10 flex items-center px-2 border-t border-gray-600 touch-none">
+      <div className="bg-gray-700 h-8 flex items-center px-1 border-t border-gray-600 touch-none">
         <button 
           onClick={addTab}
-          className="p-2 text-gray-300 hover:text-white rounded active:bg-gray-600"
+          className="p-1 text-gray-300 hover:text-white rounded active:bg-gray-600"
         >
-          <FiPlus className="text-base" />
+          <FiPlus className="text-xs" />
         </button>
         <div className="flex ml-1 h-full overflow-x-auto scrollbar-hide">
           {tabs.map(tab => (
             <div
               key={tab.id}
-              className={`flex items-center px-2 h-full max-w-[120px] min-w-[60px] ${
+              className={`flex items-center px-1 h-full max-w-[100px] min-w-[40px] ${
                 tab.active ? 'bg-gray-800' : 'bg-gray-700 hover:bg-gray-600'
-              } rounded-t-md border-t border-l border-r border-gray-600 mr-1 cursor-pointer active:scale-95`}
+              } rounded-t-sm border-t border-l border-r border-gray-600 mr-1 cursor-pointer active:scale-95`}
               onClick={() => switchTab(tab.id)}
             >
-              <span className="truncate text-xs text-gray-300">{tab.title}</span>
+              <span className="truncate text-[10px] text-gray-300">{tab.title}</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   closeTab(tab.id);
                 }}
-                className="ml-1 text-gray-400 hover:text-white active:scale-90"
+                className="ml-0.5 text-gray-400 hover:text-white active:scale-90"
               >
-                <FiX className="text-xs" />
+                <FiX className="text-[8px]" />
               </button>
             </div>
           ))}
@@ -376,33 +376,33 @@ export default function BrowserWindow() {
       </div>
 
       {/* Navigation Bar - Mobile optimized */}
-      <div className="bg-gray-700 h-12 flex items-center px-2 border-t border-gray-600 touch-none">
-        <div className="flex space-x-1 mr-1">
+      <div className="bg-gray-700 h-10 flex items-center px-1 border-t border-gray-600 touch-none">
+        <div className="flex space-x-0.5 mr-1">
           <button 
             onClick={goBack}
-            className="p-2 text-gray-300 hover:text-white rounded disabled:opacity-30 active:bg-gray-600"
+            className="p-1 text-gray-300 hover:text-white rounded disabled:opacity-30 active:bg-gray-600"
             disabled={!canGoBack}
           >
-            <FiChevronLeft className="text-base" />
+            <FiChevronLeft className="text-xs" />
           </button>
           <button 
             onClick={goForward}
-            className="p-2 text-gray-300 hover:text-white rounded disabled:opacity-30 active:bg-gray-600"
+            className="p-1 text-gray-300 hover:text-white rounded disabled:opacity-30 active:bg-gray-600"
             disabled={!canGoForward}
           >
-            <FiChevronRight className="text-base" />
+            <FiChevronRight className="text-xs" />
           </button>
           <button 
             onClick={refresh}
-            className="p-2 text-gray-300 hover:text-white rounded active:bg-gray-600"
+            className="p-1 text-gray-300 hover:text-white rounded active:bg-gray-600"
           >
-            <FiRefreshCw className="text-base" />
+            <FiRefreshCw className="text-xs" />
           </button>
           <button 
             onClick={goHome}
-            className="p-2 text-gray-300 hover:text-white rounded active:bg-gray-600"
+            className="p-1 text-gray-300 hover:text-white rounded active:bg-gray-600"
           >
-            <FiHome className="text-base" />
+            <FiHome className="text-xs" />
           </button>
         </div>
         <div className="flex-1 flex">
@@ -411,13 +411,13 @@ export default function BrowserWindow() {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && navigate()}
-            className="w-full bg-gray-800 text-white text-sm px-3 py-2 rounded-l-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            onKeyDown={handleKeyDown}
+            className="w-full bg-gray-800 text-white text-xs px-2 py-1 rounded-l-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-orange-500"
             placeholder="Search or enter address"
           />
           <button
             onClick={navigate}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-r-md text-sm active:bg-orange-700"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-2 py-1 rounded-r-sm text-xs active:bg-orange-700"
           >
             Go
           </button>
@@ -426,12 +426,12 @@ export default function BrowserWindow() {
 
       {/* Browser Content - Mobile optimized */}
       <div className="flex-1 bg-gray-100 flex items-center justify-center overflow-auto">
-        <div className="text-center p-4">
-          <h3 className="text-lg font-medium mb-2">Ubuntu Mobile Browser</h3>
-          <p className="text-gray-600 mb-4 text-sm">
+        <div className="text-center p-3">
+          <h3 className="text-sm font-medium mb-1">Ubuntu Mobile Browser</h3>
+          <p className="text-gray-600 mb-3 text-xs">
             Enter a URL or search term above to browse
           </p>
-          <p className="text-xs text-gray-500">
+          <p className="text-[10px] text-gray-500">
             Websites open in new tabs for better compatibility
           </p>
         </div>
@@ -439,22 +439,22 @@ export default function BrowserWindow() {
 
       {/* Mobile-optimized Close Confirmation Popup */}
       {showPopup && (
-        <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 p-4 rounded-lg border border-gray-600 w-full max-w-sm">
-            <h3 className="text-white font-medium mb-3 text-lg">Close Window?</h3>
-            <p className="text-gray-300 text-sm mb-6">
+        <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-50 p-3">
+          <div className="bg-gray-800 p-3 rounded-sm border border-gray-600 w-full max-w-xs">
+            <h3 className="text-white font-medium mb-2 text-sm">Close Window?</h3>
+            <p className="text-gray-300 text-xs mb-4">
               Are you sure you want to close this browser window?
             </p>
-            <div className="flex justify-end space-x-3">
+            <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setShowPopup(false)}
-                className="px-4 py-2 text-gray-300 hover:text-white active:bg-gray-700 rounded"
+                className="px-3 py-1 text-gray-300 hover:text-white active:bg-gray-700 rounded text-xs"
               >
                 Cancel
               </button>
               <button
-                onClick={() => {/* Close logic here */}}
-                className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded active:bg-orange-700"
+                onClick={() => toggleBrowser()}
+                className="px-3 py-1 bg-orange-500 hover:bg-orange-600 text-white rounded text-xs active:bg-orange-700"
               >
                 Close
               </button>

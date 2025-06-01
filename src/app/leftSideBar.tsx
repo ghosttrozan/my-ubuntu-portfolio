@@ -10,20 +10,32 @@ import terminal from "../../public/assets/terminal.png";
 import vscode from "../../public/assets/vscode.png";
 import spotify from "../../public/assets/spotify.png";
 import { useState } from "react";
+import { useBrowserStore } from '../store/browserWindowStore'
+import { useCalculatorStore } from '../store/calculatorWindowStore'
+import { useAboutMeStore } from '../store/aboutMeWindow'
 
 export default function LeftSideBar() {
+  const toggleBrowser = useBrowserStore((state) => state.toggleBrowser);
+  const toggleCalculator = useCalculatorStore((state) => state.toggleCalculator);
+  const toggleAboutMe = useAboutMeStore((state) => state.toggleAboutMe);
+
   const apps = [
-    { icon: chrome, name: "Chrome", path: "chrome" },
-    { icon: calculator, name: "Calculator", path: "calculator" },
-    { icon: file, name: "Files", path: "file" },
-    { icon: terminal, name: "Terminal", path: "terminal" },
-    { icon: vscode, name: "VS Code", path: "vscode" },
-    { icon: spotify, name: "Spotify", path: "spotify" },
-    { icon: setting, name: "Settings", path: "setting" },
+    { icon: chrome, name: "Chrome", path: "chrome", action: toggleBrowser },
+    { icon: calculator, name: "Calculator", path: "calculator", action: toggleCalculator },
+    { icon: file, name: "About Alkaif", path: "file", action: toggleAboutMe },
+    { icon: terminal, name: "Terminal", path: "terminal", func: () => {} },
+    { icon: vscode, name: "VS Code", path: "vscode", func: () => {} },
+    { icon: spotify, name: "Spotify", path: "spotify", func: () => {} },
+    { icon: setting, name: "Settings", path: "setting", func: () => {} },
   ];
 
   const [activeApp, setActiveApp] = useState<string | null>(null);
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
+
+  const handleAppClick = (app: typeof apps[0]) => {
+    setActiveApp(app.path);
+    app.action(); // Call the function associated with the app
+  };
 
   return (
     <motion.div
@@ -42,8 +54,8 @@ export default function LeftSideBar() {
             whileTap={{ scale: 0.95 }}
             onHoverStart={() => setShowTooltip(app.path)}
             onHoverEnd={() => setShowTooltip(null)}
-            onClick={() => setActiveApp(app.path)}
-          >
+            onClick={() => handleAppClick(app)}
+          > 
             <div
               className={`p-2 rounded-lg transition-all ${
                 activeApp === app.path
@@ -76,21 +88,21 @@ export default function LeftSideBar() {
           </motion.div>
         ))}
         <div className="absolute bottom-20 cursor-pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6 text-white"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-            </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6 text-white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
       </div>
     </motion.div>
   );

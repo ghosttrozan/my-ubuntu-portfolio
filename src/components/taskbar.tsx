@@ -67,7 +67,7 @@ export default function   SystemMenu() {
   };
 
   return (
-    <div className="relative z-100">
+    <div className="relative z-50">
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 text-gray-300 hover:bg-gray-600 rounded-full transition"

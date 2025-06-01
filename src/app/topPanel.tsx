@@ -57,7 +57,7 @@ export default function TopPanel() {
   };
 
   return (
-    <div className="bg-[#2c2c2c] text-white text-sm px-3 py-2 flex items-center justify-between w-full fixed top-0 left-0 z-50">
+    <div className="bg-black text-white text-sm px-3 py-2 flex items-center justify-between w-full fixed top-0 left-0 z-50">
       {/* Left: Activities Button (hidden on mobile) */}
       <button className="hidden sm:block">Activities</button>
 
