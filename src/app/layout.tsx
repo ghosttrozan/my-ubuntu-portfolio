@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import HomePage from "./page";
+import HomePage from "./homepage";
 import Main from "./main";
 import TopPanel from "./topPanel";
 
@@ -12,7 +12,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="">
         <Main/>
-        {/* <main>{children}</main> */}
+        <main>{children}</main>
       </body>
     </html>
   );

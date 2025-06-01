@@ -1,6 +1,6 @@
 "use client";
 
-import HomePage from "./page";
+import HomePage from "./homepage";
 import TopPanel from "./topPanel";
 import { useLockStore } from "../store/lockStore";
 import { usePowerStore } from "../store/powerStore";
