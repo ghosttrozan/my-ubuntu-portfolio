@@ -1,12 +1,25 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { FiX, FiMinus, FiMaximize2, FiRefreshCw, FiChevronLeft, FiChevronRight, FiPlus, FiHome } from "react-icons/fi";
 import { useBrowserStore } from '../store/browserWindowStore'
 
+interface Tab {
+  id: number;
+  url: string;
+  displayUrl: string;
+  title: string;
+  active: boolean;
+  canGoBack: boolean;
+  canGoForward: boolean;
+  history: string[];
+  displayHistory?: string[];
+  historyIndex: number;
+}
+
 export default function BrowserWindow() {
   const toggleBrowser = useBrowserStore((state) => state.toggleBrowser);
-  const [tabs, setTabs] = useState([
+  const [tabs, setTabs] = useState<Tab[]>([
     { 
       id: 1, 
       url: "about:blank", 
@@ -23,13 +36,13 @@ export default function BrowserWindow() {
   const [showPopup, setShowPopup] = useState(false);
   const [position, setPosition] = useState({ x: 20, y: 20 });
   const [isDragging, setIsDragging] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const addressInputRef = useRef<HTMLInputElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
 
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: Math.min(320, window.innerWidth - 40),
-    height: Math.min(500, window.innerHeight - 80)
+  // Initialize window dimensions safely for SSR
+  const [windowDimensions] = useState({
+    width: typeof window !== 'undefined' ? Math.min(320, window.innerWidth - 40) : 320,
+    height: typeof window !== 'undefined' ? Math.min(500, window.innerHeight - 80) : 500
   });
 
   // Handle window dragging
@@ -50,7 +63,7 @@ export default function BrowserWindow() {
 
   // Add new tab
   const addTab = () => {
-    const newTab = {
+    const newTab: Tab = {
       id: Date.now(),
       url: "about:blank",
       displayUrl: "about:blank",
@@ -168,7 +181,7 @@ export default function BrowserWindow() {
   };
 
   // Handle Enter key in address bar
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") navigate();
   };
 
@@ -180,7 +193,7 @@ export default function BrowserWindow() {
         const newTabs = [...prevTabs];
         const activeTab = newTabs[activeTabIndex];
         
-        if (activeTab.historyIndex > 0) {
+        if (activeTab.historyIndex > 0 && activeTab.displayHistory) {
           const newIndex = activeTab.historyIndex - 1;
           newTabs[activeTabIndex] = {
             ...activeTab,
@@ -207,7 +220,7 @@ export default function BrowserWindow() {
         const newTabs = [...prevTabs];
         const activeTab = newTabs[activeTabIndex];
         
-        if (activeTab.historyIndex < activeTab.history.length - 1) {
+        if (activeTab.historyIndex < activeTab.history.length - 1 && activeTab.displayHistory) {
           const newIndex = activeTab.historyIndex + 1;
           newTabs[activeTabIndex] = {
             ...activeTab,

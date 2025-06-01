@@ -6,7 +6,7 @@ import {
   FiImage, FiUpload, FiCheck, FiMenu, FiGrid 
 } from "react-icons/fi";
 import { useWallpaperStore, wallpapers } from "@/store/wallpaperStore";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useSettingStore } from '../store/settingWindow';
 
 export default function SettingsWindow() {
@@ -63,7 +63,8 @@ export default function SettingsWindow() {
     e.target.value = "";
   };
 
-  const applyWallpaper = (url: string) => {
+  const applyWallpaper = (wp: string | StaticImageData) => {
+    const url = typeof wp === 'string' ? wp : wp.src;
     setWallpaper(url);
   };
 
@@ -233,7 +234,9 @@ export default function SettingsWindow() {
                       <div 
                         key={index}
                         className={`relative aspect-video rounded-lg overflow-hidden border-2 cursor-pointer transition-transform ${
-                          wallpaper === wp ? "border-blue-500" : "border-gray-700 hover:border-gray-500"
+                          wallpaper === (typeof wp === 'string' ? wp : wp.src) 
+                            ? "border-blue-500" 
+                            : "border-gray-700 hover:border-gray-500"
                         }`}
                         onClick={() => applyWallpaper(wp)}
                       >
@@ -244,7 +247,7 @@ export default function SettingsWindow() {
                           className="object-cover"
                           sizes="(max-width: 768px) 50vw, 33vw"
                         />
-                        {wallpaper === wp && (
+                        {wallpaper === (typeof wp === 'string' ? wp : wp.src) && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                             <FiCheck className="text-white text-2xl" />
                           </div>
