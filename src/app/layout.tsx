@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import HomePage from "./homepage";
+import HomePage from "./page";
 import Main from "./main";
 import TopPanel from "./topPanel";
 
