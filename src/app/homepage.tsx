@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import BrowserWindow from "./browserWindow";
 import { useBrowserStore } from "../store/browserWindowStore";

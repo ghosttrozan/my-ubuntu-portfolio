@@ -1,19 +1,14 @@
 import "../styles/globals.css";
-import HomePage from "./homepage";
 import Main from "./main";
-import TopPanel from "./topPanel";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="">
-        <Main/>
+      <body>
+        <Main /> {/* if Main is client component */}
         <main>{children}</main>
       </body>
     </html>
   );
 }
+
