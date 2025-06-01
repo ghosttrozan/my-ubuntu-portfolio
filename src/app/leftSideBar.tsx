@@ -13,20 +13,28 @@ import { useState } from "react";
 import { useBrowserStore } from '../store/browserWindowStore'
 import { useCalculatorStore } from '../store/calculatorWindowStore'
 import { useAboutMeStore } from '../store/aboutMeWindow'
+import { useTerminalStore } from '../store/terminalWindow'
+import { useVsCodeStore } from '../store/vsCodeWindow'
+import { useSpotifyStore } from '../store/spotifyWindow'
+import { useSettingStore } from '../store/settingWindow'
 
 export default function LeftSideBar() {
   const toggleBrowser = useBrowserStore((state) => state.toggleBrowser);
   const toggleCalculator = useCalculatorStore((state) => state.toggleCalculator);
   const toggleAboutMe = useAboutMeStore((state) => state.toggleAboutMe);
+  const toggleTerminal = useTerminalStore((state) => state.toggleTerminal);
+  const toggleVsCode = useVsCodeStore((state) => state.toggleVsCode);
+  const toggleSpotify = useSpotifyStore((state) => state.toggleSpotify);
+  const toggleSetting = useSettingStore((state) => state.toggleSetting);
 
   const apps = [
     { icon: chrome, name: "Chrome", path: "chrome", action: toggleBrowser },
     { icon: calculator, name: "Calculator", path: "calculator", action: toggleCalculator },
     { icon: file, name: "About Alkaif", path: "file", action: toggleAboutMe },
-    { icon: terminal, name: "Terminal", path: "terminal", func: () => {} },
-    { icon: vscode, name: "VS Code", path: "vscode", func: () => {} },
-    { icon: spotify, name: "Spotify", path: "spotify", func: () => {} },
-    { icon: setting, name: "Settings", path: "setting", func: () => {} },
+    { icon: terminal, name: "Terminal", path: "terminal", action: toggleTerminal },
+    { icon: vscode, name: "VS Code", path: "vscode", action: toggleVsCode },
+    { icon: spotify, name: "Spotify", path: "spotify", action: toggleSpotify },
+    { icon: setting, name: "Settings", path: "setting", action: toggleSetting },
   ];
 
   const [activeApp, setActiveApp] = useState<string | null>(null);
@@ -87,22 +95,6 @@ export default function LeftSideBar() {
             </AnimatePresence>
           </motion.div>
         ))}
-        <div className="absolute bottom-20 cursor-pointer">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 text-white"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
-        </div>
       </div>
     </motion.div>
   );

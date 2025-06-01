@@ -121,29 +121,22 @@ export default function AboutMeWindow() {
                   title: "Portfolio OS",
                   desc: "Ubuntu-style portfolio with interactive windows",
                   tech: "Next.js, Tailwind, Framer Motion",
-                  link:''
+                  link:'#'
                 },
                 {
                   id: 2,
                   title: "Swiggy Clone",
                   desc: "Frontend of Swiggy",
                   tech: "React, Tailwindcss",
-                  link:''
+                  link:'https://swiggy-yt-project.vercel.app'
                 },
                 {
                   id: 3,
-                  title: "Task Manager",
-                  desc: "Productivity app with drag-n-drop interface",
-                  tech: "React, Zustand, Firebase",
-                  link:''
+                  title: "Akademiya Pro",
+                  desc: "School management system with admin panel and student and teacher app",
+                  tech: "MERN Stack, JWT Auth, React-Native",
+                  link:'https://akademiyapro.netlify.app'
                 },
-                {
-                  id: 4,
-                  title: "Social Media Dashboard",
-                  desc: "Analytics dashboard for social platforms",
-                  tech: "Next.js, Chart.js, REST API",
-                  link:''
-                }
               ].map((project) => (
                 <div
                   key={project.id}
@@ -152,6 +145,7 @@ export default function AboutMeWindow() {
                   <h3 className="font-medium text-white">{project.title}</h3>
                   <p className="text-sm text-gray-400 mt-1">{project.desc}</p>
                   <p className="text-xs text-gray-500 mt-2">{project.tech}</p>
+                  <a target="_blank" href={project.link} className="text-blue-400 mt-4 hover:underline">View Project</a>
                 </div>
               ))}
             </div>

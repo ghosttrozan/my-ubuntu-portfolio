@@ -2,6 +2,6 @@ import { create } from 'zustand';
 
 
 export const useAboutMeStore = create((set) => ({
-  isAboutMeOpen: true,
+  isAboutMeOpen: false,
   toggleAboutMe: () => set((state) => ({ isAboutMeOpen: !state.isAboutMeOpen })),
 }));

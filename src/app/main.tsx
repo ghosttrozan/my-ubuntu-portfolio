@@ -8,6 +8,7 @@ import LockScreen from "./lockScreen";
 import PowerScreen from "./powerScreen";
 import LeftSideBar from "./leftSideBar";
 import BrowserWindow from "./browserWindow";
+import RightSideBar from "./rightSideBar";
 
 export default function Main() {
   const { isLocked } = useLockStore();
@@ -24,6 +25,7 @@ export default function Main() {
             <>
               <TopPanel />
               <LeftSideBar />
+              <RightSideBar />
               <HomePage />
             </>
           )}
