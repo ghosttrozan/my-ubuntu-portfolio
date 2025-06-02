@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiPower } from "react-icons/fi";
 import chrome from "../../public/assets/chrome.png";
 import calculator from "../../public/assets/calculator.png";
 import file from "../../public/assets/file.png";
@@ -41,9 +40,12 @@ export default function LeftSideBar() {
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
 
   const handleAppClick = (app: typeof apps[0]) => {
+  // Only proceed if we're not already active
+  if (activeApp !== app.path) {
     setActiveApp(app.path);
-    app.action(); // Call the function associated with the app
-  };
+    app.action();
+  }
+};
 
   return (
     <motion.div

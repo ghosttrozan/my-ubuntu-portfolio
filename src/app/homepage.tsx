@@ -17,6 +17,7 @@ import VSCodeWindow from "./vsCodeWindow";
 import SpotifyWindow from "./spotifyWindow";
 import SettingsWindow from "./settingWindow";
 import ContactWindow from "./contactWindow";
+import Visitors from "@/components/trackVisitor";
 
 export default function HomePage() {
   const { isBrowserOpen } = useBrowserStore();

@@ -37,7 +37,7 @@ export default function RightSideBar() {
       className="fixed right-0 top-0 h-screen flex flex-col justify-between items-center pt-10 z-40"
     >
       {/* App Icons */}
-      <div className="bg-transparent backdrop-blur-lg rounded-2xl gap-4 flex flex-col items-center justify-start pt-6 px-2 h-full border-r border-gray-700/50 shadow-xl">
+      <div className="bg-transparent rounded-2xl gap-4 flex flex-col items-center justify-start pt-6 px-2 h-full border-r border-gray-700/50 ">
         {apps.map((app) => (
           <motion.div
             key={app.path}

@@ -3,5 +3,11 @@ import { create } from 'zustand';
 
 export const useBrowserStore = create((set) => ({
   isBrowserOpen: false,
-  toggleBrowser: () => set((state) => ({ isBrowserOpen: !state.isBrowserOpen })),
+  toggleBrowser: () => {
+    console.log('Toggling browser window'); // Debug log
+    set((state) => {
+      console.log('Current state:', state.isBrowserOpen); // Debug log
+      return { isBrowserOpen: !state.isBrowserOpen };
+    });
+  },
 }));
