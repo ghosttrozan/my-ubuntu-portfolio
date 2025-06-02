@@ -6,7 +6,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: (config) => {
+  webpack: (config: any) => {
     config.externals = [...config.externals, { '@prisma/client': '@prisma/client' }]
     return config
   },
