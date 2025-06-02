@@ -1,4 +1,4 @@
-# 🍎 macOS-Style Portfolio [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=yourusername.yourrepo)](https://github.com/yourusername/yourrepo)
+# 🍎 ubuntu-Style Portfolio [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=ghosttrozan.my-ubuntu-portfolio)](https://github.com/ghosttrozan/my-ubuntu-portfolio)
 
 ![Portfolio Screenshot](./public/screenshot.png)
 
@@ -6,7 +6,7 @@ A sleek, interactive portfolio inspired by macOS with draggable windows, a dock,
 
 ## ✨ Features
 
-- 🖥️ **macOS-like Desktop Experience**  
+- 🖥️ **ubuntu-like Desktop Experience**  
   - Draggable, resizable windows  
   - Minimize/maximize animations  
   - System-style dock with hover effects  
