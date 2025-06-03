@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Image from "next/image";
 import BrowserWindow from "./browserWindow";
 import { useBrowserStore } from "../store/browserWindowStore";
@@ -7,9 +7,9 @@ import { useAboutMeStore } from "../store/aboutMeWindow";
 import { useTerminalStore } from "../store/terminalWindow";
 import { useVsCodeStore } from "../store/vsCodeWindow";
 import { useSpotifyStore } from "../store/spotifyWindow";
-import {useWallpaperStore}  from "../store/wallpaperStore";
-import { useSettingStore } from '../store/settingWindow'
-import { useContactStore } from '../store/contactMe';
+import { useWallpaperStore } from "../store/wallpaperStore";
+import { useSettingStore } from "../store/settingWindow";
+import { useContactStore } from "../store/contactMe";
 import CalculatorWindow from "./calcutaorWindow";
 import AboutMeWindow from "./aboutMeWindow";
 import TerminalWindow from "./terminalWindow";
@@ -17,7 +17,6 @@ import VSCodeWindow from "./vsCodeWindow";
 import SpotifyWindow from "./spotifyWindow";
 import SettingsWindow from "./settingWindow";
 import ContactWindow from "./contactWindow";
-import Visitors from "@/components/trackVisitor";
 
 export default function HomePage() {
   const { isBrowserOpen } = useBrowserStore();

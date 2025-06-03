@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
   FiX,
@@ -14,7 +13,7 @@ import {
   FiBook,
   FiBriefcase,
 } from "react-icons/fi";
-import { useAboutMeStore } from '../store/aboutMeWindow'
+import { useAboutMeStore } from "../store/aboutMeWindow";
 
 export default function AboutMeWindow() {
   const [activeSection, setActiveSection] = useState("about");
@@ -23,7 +22,7 @@ export default function AboutMeWindow() {
   const [isMobile, setIsMobile] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
 
-    const toggleAboutMe = useAboutMeStore((state) => state.toggleAboutMe);
+  const toggleAboutMe = useAboutMeStore((state) => state.toggleAboutMe);
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,18 +31,38 @@ export default function AboutMeWindow() {
         setShowSidebar(true);
       }
     };
-    
+
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const sections = [
-    { id: "about", icon: <FiUser className="text-blue-400" />, title: "About Me" },
-    { id: "projects", icon: <FiFolder className="text-yellow-400" />, title: "Projects" },
-    { id: "skills", icon: <FiCode className="text-green-400" />, title: "Skills" },
-    { id: "resume", icon: <FiFile className="text-orange-400" />, title: "Resume" },
-    { id: "education", icon: <FiBook className="text-purple-400" />, title: "Education" },
+    {
+      id: "about",
+      icon: <FiUser className="text-blue-400" />,
+      title: "About Me",
+    },
+    {
+      id: "projects",
+      icon: <FiFolder className="text-yellow-400" />,
+      title: "Projects",
+    },
+    {
+      id: "skills",
+      icon: <FiCode className="text-green-400" />,
+      title: "Skills",
+    },
+    {
+      id: "resume",
+      icon: <FiFile className="text-orange-400" />,
+      title: "Resume",
+    },
+    {
+      id: "education",
+      icon: <FiBook className="text-purple-400" />,
+      title: "Education",
+    },
   ];
 
   const handleDragStart = () => setIsDragging(true);
@@ -61,7 +80,11 @@ export default function AboutMeWindow() {
         return (
           <div className="p-4">
             <h2 className="text-xl font-bold text-white mb-4">About Me</h2>
-            <div className={`flex ${isMobile ? "flex-col" : "flex-row"} items-start mb-4 gap-4`}>
+            <div
+              className={`flex ${
+                isMobile ? "flex-col" : "flex-row"
+              } items-start mb-4 gap-4`}
+            >
               <div className="w-32 h-32 relative overflow-hidden rounded-full min-w-[8rem]">
                 <Image
                   src="https://avatars.githubusercontent.com/u/179936561?v=4"
@@ -73,16 +96,19 @@ export default function AboutMeWindow() {
 
               <div>
                 <p className="text-gray-300 mb-2">
-                  Yo! I'm Bobby — a CS student who codes like it's a game. MERN stack is my playground, 
-                  and Java is my sidekick when I wanna get fancy on the backend.
+                  Yo! I'm Bobby — a CS student who codes like it's a game. MERN
+                  stack is my playground, and Java is my sidekick when I wanna
+                  get fancy on the backend.
                 </p>
                 <p className="text-gray-300">
-                  I specialize in React, TypeScript, Node.js, Next.js, creating intuitive user experiences.
+                  I specialize in React, TypeScript, Node.js, Next.js, creating
+                  intuitive user experiences.
                 </p>
                 <p className="text-gray-200 mt-4">
-                  Outside of tech? I'm either vibing with playlists, cooking up startup ideas, 
-                  or scrolling through dev memes. If you're into building crazy ideas or just wanna collab, 
-                  hit me up — let's build something legendary 🚀
+                  Outside of tech? I'm either vibing with playlists, cooking up
+                  startup ideas, or scrolling through dev memes. If you're into
+                  building crazy ideas or just wanna collab, hit me up — let's
+                  build something legendary 🚀
                 </p>
               </div>
             </div>
@@ -90,17 +116,29 @@ export default function AboutMeWindow() {
               <h3 className="font-medium text-blue-400 mb-2">Contact</h3>
               <ul className="text-sm text-gray-300 space-y-1">
                 <li>
-                  <a target="_blank" href="mailto:alkaifk86@gmail.com" className="hover:text-blue-400">
+                  <a
+                    target="_blank"
+                    href="mailto:alkaifk86@gmail.com"
+                    className="hover:text-blue-400"
+                  >
                     Email: alkaifk86@gmail.com
                   </a>
                 </li>
                 <li>
-                  <a target="_blank" href="https://www.github.com/ghosttrozan" className="hover:text-blue-400">
+                  <a
+                    target="_blank"
+                    href="https://www.github.com/ghosttrozan"
+                    className="hover:text-blue-400"
+                  >
                     GitHub: ghosttrozan
                   </a>
                 </li>
                 <li>
-                  <a target="_blank" href="tel:+916378211202" className="hover:text-blue-400">
+                  <a
+                    target="_blank"
+                    href="tel:+916378211202"
+                    className="hover:text-blue-400"
+                  >
                     Phone: 6378211202
                   </a>
                 </li>
@@ -114,28 +152,32 @@ export default function AboutMeWindow() {
         return (
           <div className="p-4">
             <h2 className="text-xl font-bold text-white mb-4">Projects</h2>
-            <div className={`grid ${isMobile ? "grid-cols-1" : "grid-cols-2"} gap-4`}>
+            <div
+              className={`grid ${
+                isMobile ? "grid-cols-1" : "grid-cols-2"
+              } gap-4`}
+            >
               {[
                 {
                   id: 1,
                   title: "Portfolio OS",
                   desc: "Ubuntu-style portfolio with interactive windows",
                   tech: "Next.js, Tailwind, Framer Motion",
-                  link:'#'
+                  link: "#",
                 },
                 {
                   id: 2,
                   title: "Swiggy Clone",
                   desc: "Frontend of Swiggy",
                   tech: "React, Tailwindcss",
-                  link:'https://swiggy-yt-project.vercel.app'
+                  link: "https://swiggy-yt-project.vercel.app",
                 },
                 {
                   id: 3,
                   title: "Akademiya Pro",
                   desc: "School management system with admin panel and student and teacher app",
                   tech: "MERN Stack, JWT Auth, React-Native",
-                  link:'https://akademiyapro.netlify.app'
+                  link: "https://akademiyapro.netlify.app",
                 },
               ].map((project) => (
                 <div
@@ -145,7 +187,13 @@ export default function AboutMeWindow() {
                   <h3 className="font-medium text-white">{project.title}</h3>
                   <p className="text-sm text-gray-400 mt-1">{project.desc}</p>
                   <p className="text-xs text-gray-500 mt-2">{project.tech}</p>
-                  <a target="_blank" href={project.link} className="text-blue-400 mt-4 hover:underline">View Project</a>
+                  <a
+                    target="_blank"
+                    href={project.link}
+                    className="text-blue-400 mt-4 hover:underline"
+                  >
+                    View Project
+                  </a>
                 </div>
               ))}
             </div>
@@ -160,8 +208,14 @@ export default function AboutMeWindow() {
               <h3 className="font-medium text-gray-300 mb-2">Frontend</h3>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "React", "Next.js", "TypeScript", "JavaScript", 
-                  "HTML/CSS", "Tailwind CSS", "Redux", "Zustand"
+                  "React",
+                  "Next.js",
+                  "TypeScript",
+                  "JavaScript",
+                  "HTML/CSS",
+                  "Tailwind CSS",
+                  "Redux",
+                  "Zustand",
                 ].map((skill) => (
                   <span
                     key={skill}
@@ -176,8 +230,13 @@ export default function AboutMeWindow() {
               <h3 className="font-medium text-gray-300 mb-2">Backend</h3>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Node.js", "Express", "MongoDB", "PostgreSQL", 
-                  "REST APIs", "GraphQL", "Java"
+                  "Node.js",
+                  "Express",
+                  "MongoDB",
+                  "PostgreSQL",
+                  "REST APIs",
+                  "GraphQL",
+                  "Java",
                 ].map((skill) => (
                   <span
                     key={skill}
@@ -192,8 +251,13 @@ export default function AboutMeWindow() {
               <h3 className="font-medium text-gray-300 mb-2">Tools</h3>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Git", "Docker", "AWS", "CI/CD", 
-                  "Figma", "Jest", "Postman"
+                  "Git",
+                  "Docker",
+                  "AWS",
+                  "CI/CD",
+                  "Figma",
+                  "Jest",
+                  "Postman",
                 ].map((skill) => (
                   <span
                     key={skill}
@@ -236,9 +300,15 @@ export default function AboutMeWindow() {
                 </h4>
                 <p className="text-gray-400">2024 - Present</p>
                 <ul className="list-disc list-inside text-gray-300 mt-2 text-sm space-y-1">
-                  <li>Built full-stack web apps using React, Node.js, MongoDB</li>
-                  <li>Created a school management system & e-commerce websites</li>
-                  <li>Worked on real-world UI/UX, APIs, auth, and deployment</li>
+                  <li>
+                    Built full-stack web apps using React, Node.js, MongoDB
+                  </li>
+                  <li>
+                    Created a school management system & e-commerce websites
+                  </li>
+                  <li>
+                    Worked on real-world UI/UX, APIs, auth, and deployment
+                  </li>
                 </ul>
               </div>
 
@@ -250,7 +320,9 @@ export default function AboutMeWindow() {
                 <ul className="list-disc list-inside text-gray-300 mt-2 text-sm space-y-1">
                   <li>Worked with OOP, file handling, and basic DSA</li>
                   <li>Built CLI tools and small desktop apps in Java</li>
-                  <li>Used Java in backend logic for some full-stack projects</li>
+                  <li>
+                    Used Java in backend logic for some full-stack projects
+                  </li>
                 </ul>
               </div>
             </div>
@@ -289,25 +361,29 @@ export default function AboutMeWindow() {
                   </p>
                 </div>
                 <p className="text-gray-300">
-                  Scored 70% in Science stream with focus on Physics, Chemistry, and Mathematics.
+                  Scored 70% in Science stream with focus on Physics, Chemistry,
+                  and Mathematics.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="min-w-[8rem]">
-                  <h3 className="font-medium text-white">
-                    Secondary (10th)
-                  </h3>
+                  <h3 className="font-medium text-white">Secondary (10th)</h3>
                   <p className="text-gray-400">Rajasthan Board • 2020</p>
                 </div>
-                <p className="text-gray-300">Achieved 84% overall with distinction in Mathematics and Science.</p>
+                <p className="text-gray-300">
+                  Achieved 84% overall with distinction in Mathematics and
+                  Science.
+                </p>
               </div>
 
               <div className="mt-8">
-                <h3 className="font-medium text-white mb-3">
-                  Certifications
-                </h3>
-                <div className={`grid ${isMobile ? "grid-cols-1" : "grid-cols-2"} gap-3`}>
+                <h3 className="font-medium text-white mb-3">Certifications</h3>
+                <div
+                  className={`grid ${
+                    isMobile ? "grid-cols-1" : "grid-cols-2"
+                  } gap-3`}
+                >
                   {[
                     { name: "Frontend Development with React", year: "2024" },
                     { name: "Backend APIs with Node.js", year: "2024" },
@@ -359,11 +435,11 @@ export default function AboutMeWindow() {
       className={`fixed bg-gray-900 rounded-lg overflow-hidden shadow-2xl border border-gray-700 flex flex-col z-50 ${
         isDragging ? "cursor-grabbing" : "cursor-default"
       }`}
-      style={{ 
-        width: isMobile ? "90vw" : "800px", 
+      style={{
+        width: isMobile ? "90vw" : "800px",
         height: isMobile ? "80vh" : "500px",
         maxWidth: "100vw",
-        maxHeight: "100vh"
+        maxHeight: "100vh",
       }}
     >
       {/* Window Header */}
@@ -372,7 +448,10 @@ export default function AboutMeWindow() {
         onPointerDown={(e) => e.stopPropagation()}
       >
         <div className="flex items-center space-x-2">
-          <button onClick={() => toggleAboutMe()} className="w-3 h-3 rounded-full bg-red-500 flex items-center justify-center hover:bg-red-400 transition">
+          <button
+            onClick={() => toggleAboutMe()}
+            className="w-3 h-3 rounded-full bg-red-500 flex items-center justify-center hover:bg-red-400 transition"
+          >
             <FiX className="text-xs opacity-0 hover:opacity-100" />
           </button>
           <button className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition">
@@ -389,11 +468,21 @@ export default function AboutMeWindow() {
       {/* Navigation Bar */}
       <div className="bg-gray-800 border-b border-gray-700 p-2 flex items-center">
         {isMobile && (
-          <button 
+          <button
             onClick={() => setShowSidebar(!showSidebar)}
             className="mr-2 p-1 text-gray-400 hover:text-white rounded"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -412,7 +501,11 @@ export default function AboutMeWindow() {
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar - Conditionally rendered on mobile */}
         {(!isMobile || showSidebar) && (
-          <div className={`${isMobile ? "absolute z-10 w-64 h-full bg-gray-900" : "w-64"} bg-gray-900 border-r border-gray-700 overflow-y-auto`}>
+          <div
+            className={`${
+              isMobile ? "absolute z-10 w-64 h-full bg-gray-900" : "w-64"
+            } bg-gray-900 border-r border-gray-700 overflow-y-auto`}
+          >
             <div className="p-4">
               <h3 className="text-sm font-medium text-gray-400 mb-2">
                 Portfolio Sections
